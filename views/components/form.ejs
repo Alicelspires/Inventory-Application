@@ -1,0 +1,115 @@
+<form 
+    action="/books/new" method="POST"
+    class="w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light grid grid-cols-3 grid-rows-auto gap-4 mb-8">
+
+    <h1 class="col-span-3 text-center text-lg font-semibold">
+        <%if (mode == "create") {%>
+            New Book
+        <% } else if (mode == "update") {%>
+            Update
+        <% }%>
+    </h1>
+
+    <div class="row-start-2 flex flex-col gap-2">
+        <label for="title">Title</label>
+        <input 
+        class="bg-gray-lighter rounded-md p-1"
+        value="<%= book.title || '' %>"
+        type="text" 
+        id="title" 
+        name="title">
+
+        <label for="author">Author</label>
+        <input 
+        class="bg-gray-lighter rounded-md p-1"
+        value="<%= book.author || '' %>"
+        type="text" 
+        id="author" 
+        name="author">
+
+        <label for="year">Publishing year</label>
+        <input 
+        class="bg-gray-lighter rounded-md p-1"
+        value="<%= book.year || '' %>"
+        type="text" 
+        id="year" 
+        name="year">
+
+        <label for="publisher">Publisher name</label>
+        <input 
+        class="bg-gray-lighter rounded-md p-1"
+        value="<%= book.publisher || '' %>"
+        type="text" 
+        id="publisher" 
+        name="publisher">
+
+        <label for="genreSelect">
+            Genres
+        </label>
+
+        <select
+            id="genreSelect"
+            class=" rounded-md bg-gray-dark p-2 cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-none">
+            <option value="">Select...</option>
+            <% genres.forEach(g => {%>
+                <option value="<%= g.name_genre %>"><%= g.name_genre %></option>
+            <% }) %>
+        </select>
+
+        <!-- Visual tags-->
+        <div
+            id="tagsContainer"
+            class="flex flex-wrap gap-2 mt-2"
+            value="<%= book.genre || '' %>"
+        ></div>
+
+        <!-- Hidden - POST send -->
+        <input type="hidden" name="categories" id="tagsInput">
+
+        <!-- Live region for accessibility -->
+        <div id="tagLive" aria-live="polite" class="sr-only"></div>
+    </div>
+
+    <div class="row-start-2 flex flex-col gap-2">
+        <label for="description">Description</label>
+        <textarea 
+        class="bg-gray-lighter rounded-md p-2 h-full" 
+        name="description" 
+        value="<%= book.description || '' %>"
+        id="description">
+        </textarea>
+    </div>
+
+    <div class="row-start-2 flex flex-col items-end">
+        <label 
+            for="cover"
+            class="border-1 border-white bg-transparent rounded-md p-2 mb-4 cursor-pointer text-sm"
+            >Choose bookcase</label>
+        <input 
+            id="cover"
+            type="file" 
+            name="cover" 
+            class="mt-2 block hidden">
+        <img 
+            class="bg-gray-lighter rounded-md w-46 h-60" 
+            src="<%= book.bookcase || '' %>" 
+            alt="bookcase chosen">
+    </div>
+
+    <div class="col-span-3 flex justify-end gap-4">
+        <a href="/books">
+            <button 
+                type="button"
+                class="border-2 border-borders-and-btn rounded-md bg-gray-light py-1 h-full px-4 cursor-pointer"
+            >Voltar</button>
+        </a>
+        <button
+            class="bg-btn-attention rounded-md p-2 px-4 cursor-pointer hover:bg-gray-dark">
+            <%if (mode == "create") {%>
+                Create
+            <% } else if (mode == "update") {%>
+                Update
+            <% }%>
+        </button>
+    </div>
+</form>

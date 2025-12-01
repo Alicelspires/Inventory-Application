@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/style.css" rel="stylesheet">
+    <title>Delete</title>
+</head>
+<body class="min-h-screen grid grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
+
+    <%- include('components/navbar.ejs'); -%>
+    <%- include('components/sidebar.ejs');-%>
+
+    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center text-white">
+        <div class="w-3/5 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light flex flex-col text-center">
+            <form action="/books/:id/delete" method="POST">
+                <h1 class="text-2xl mb-6 font-semibold">Delete</h1>
+                <p>Are you sure you want to delete the <% book.title || "" %> book?</p>
+                <span class="flex justify-end gap-4 mt-4">
+                    <a href="/books">
+                        <button 
+                            type="button"
+                            class="border-2 border-borders-and-btn rounded-md bg-gray-light py-1 h-full px-4 cursor-pointer"
+                        >Voltar</button>
+                    </a>
+                    <button
+                        type="submit"
+                        class="bg-btn-attention rounded-md py-2 px-4 cursor-pointer hover:bg-gray-dark">
+                        Delete
+                    </button>
+                </span>
+            </form>
+        </div>
+    </main>
+
+    <%- include('components/footer.ejs'); -%>
+    <script src="/js/sidebar.js"></script>
+</body>
+</html>

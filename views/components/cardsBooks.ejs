@@ -1,0 +1,34 @@
+<div class="w-90 h-auto border-2 border-borders-and-btn rounded-lg bg-gray-light flex gap-4 p-4 h-48">
+    <img class="min-w-20 h-auto bg-gray-lighter rounded-md" 
+        src="<%= book.book_cover || '' %>" 
+        alt="book cover: <%= book.title || '' %>"
+    >
+    <span class="w-full flex flex-col justify-between">
+        <span class="mb-4 text-sm">
+            <h3 class="text-xl! font-titles font-semibold mb-2"><%= book.title || "" %></h3>
+            <p> <%= book.author  || '' %> | <%= book.year_book || "" %></p>
+            <hr class="my-2">
+            <p> <%= book.description.slice(0, 50) + "..." || "" %></p>
+        </span>
+        <span class="flex gap-2">
+            <a href="/books/:id/update">
+                <button class="rounded-md bg-gray-lighter p-2 cursor-pointer hover:bg-gray-dark">
+                    <img
+                        src="/img/edit.png"
+                        class="w-6 m-auto"
+                        alt="(pen-icon) edit the book info"
+                        title="edit">
+                </button>
+            </a>
+            <a href="/books/:id/delete">
+                <button class="rounded-md bg-gray-lighter p-2 cursor-pointer hover:bg-gray-dark">
+                    <img
+                        src="/img/delete.png"
+                        class="w-6 m-auto"
+                        alt="(trash icon) delete this book"
+                        title="delete">
+                </button>
+            </a>
+        </span>
+    </span>
+</div>

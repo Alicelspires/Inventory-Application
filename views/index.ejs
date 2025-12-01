@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/style.css" rel="stylesheet">
+    <title>Home</title>
+  </head>
+  <body class="min-h-screen grid grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
+
+    <%- include('components/navbar.ejs'); -%>
+    <%- include('components/sidebar.ejs');-%>
+
+    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center">
+      
+      <img class="w-20" src="/img/origami.png" alt="">
+      <h1 class="font-titles font-bold text-4xl text-white">Inventory Application</h1>
+      <a href="/books">
+        <button 
+          class="mt-8 border-2 border-borders-and-btn bg-gray-light p-2 rounded-md text-white cursor-pointer hover:bg-gray-lighter"
+          >Explore books</button>
+      </a>
+
+      <span class="flex flex-wrap justify-center m-4 gap-4 text-white font-titles">
+        <div class="grid grid-cols-2 border-2 border-borders-and-btn rounded-lg w-64 h-40 bg-gray-light p-2 items-center justify-items-center hover:scale-105 duration-300 ease-in">
+          <img class="row-span-2" src="/img/book.png" alt="">
+          <h2 class="text-6xl"><%= books.length || 0 %></h2>
+          <p class="col-start-2 text-2xl">Books</p>
+        </div>
+        <!-- <div class="border-2 border-borders-and-btn rounded-lg w-auto h-40 bg-gray-light p-2 flex items-center justify-center hover:scale-105 duration-300 ease-in">
+          <img class="row-span-2" src="/img/ink.png" alt="">
+        </div> -->
+        <div class="grid grid-cols-2 border-2 border-borders-and-btn rounded-lg w-64 h-40 bg-gray-light p-2 items-center justify-items-center hover:scale-105 duration-300 ease-in">
+          <img class="row-span-2" src="/img/star.png" alt="">
+          <h2 class="text-6xl"><%= genres.length || 0 %></h2>
+          <p class="col-start-2 text-2xl">Genres</p>
+        </div>
+      </span>
+
+    </main>
+
+    <%- include('components/footer.ejs'); -%>
+    <script src="/js/sidebar.js"></script>
+  </body>
+</html>
