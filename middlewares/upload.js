@@ -1,29 +1,25 @@
-class BookStorage {
-  constructor() {
-    this.storage = {};
-    this.id = 0;
-  }
+const multer = require("multer");
 
-  addUser({ firstName, lastName }) {
-    const id = this.id++;
-    this.storage[id] = { id, firstName, lastName };
-  }
+// Storage engine
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads");
+  },
 
-  getUsers() {
-    return Object.values(this.storage);
-  }
+  filename: function (req, file, cb) {
+    // Extracting the extension from the original file
+    const extensionFile = file.originalname.split('.')[1];
 
-  getUser(id) {
-    return this.storage[id];
-  }
+    // Create file name
+    const newFileName = require('crypto')
+        .randomBytes(36)
+        .toString('hex');
 
-  updateUser(id, { firstName, lastName }) {
-    this.storage[id] = { id, firstName, lastName };
-  }
+    // Indicates the new file name
+    cb(null, `${newFileName}.${extensionFile}`)
+  },
+});
 
-  deleteUser(id) {
-    delete this.storage[id];
-  }
-}
 
-module.exports = new UsersStorage();
+const upload = multer({ storage: storage })
+module.exports = upload;

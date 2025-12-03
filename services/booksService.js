@@ -15,5 +15,15 @@ exports.getListGenres = async () => {
 };
 
 exports.createBook = async (newBook) => {
-  return await booksRepository.insertNewBook(newBook);
+  const insertBook = await booksRepository.insertNewBook(newBook);
+
+  if (newBook.genres && newBook.genres.length > 0) {
+    await booksRepository.addGenresToBook(insertBook.id_book, newBook.genres);
+  }
+  return insertBook;
+}
+
+exports.findBookById = async (id) => {
+  const book = await booksRepository.selectBookById(id)
+  return book;
 }

@@ -1,5 +1,7 @@
-// repository/booksRepository.js
+const { query } = require("express-validator");
 const pool = require("../db/pool.js");
+
+// SELECT setval('books_id_book_seq', (SELECT COALESCE(MAX(id_book),0) FROM books));
 
 function getFilteredBooks(sort) {
   let querySort = "";
@@ -8,8 +10,8 @@ function getFilteredBooks(sort) {
     querySort = "ORDER BY ";
 
     switch (sort) {
-      case "asc": querySort += "g.name_genre ASC"; break;
-      case "desc": querySort += "g.name_genre DESC"; break;
+      case "asc": querySort += "MIN(b.title) ASC"; break;
+      case "desc": querySort += "MIN(b.title) DESC"; break;
       case "old": querySort += "b.year_book ASC"; break;
       case "new": querySort += "b.year_book DESC"; break;
     }
@@ -69,4 +71,31 @@ exports.insertNewBook = async (newBook) => {
   )
 
   return newBookQuery.rows[0];
+}
+
+exports.addGenresToBook = async (bookId, genres) => {
+  for (const genreName of genres) {
+    // takes the genre ID
+    const res = await pool.query(`SELECT id_genre FROM genres WHERE name_genre = $1`, [genreName]);
+
+    if (res.rows.length > 0) {
+      const genreId = res.rows[0].id_genre;
+      await pool.query(`INSERT INTO books_genres (id_book, id_genre) VALUES ($1, $2)`, [bookId, genreId]);
+    }
+  }
+};
+
+exports.selectBookById = async (id) => {
+  const selectedBook = await pool.query(`
+    SELECT 
+        b.*,
+        COALESCE(array_agg(DISTINCT g.name_genre), '{}') AS genres
+      FROM books b
+      LEFT JOIN books_genres bg ON bg.id_book = b.id_book
+      LEFT JOIN genres g ON g.id_genre = bg.id_genre
+      WHERE b.id_book = $1
+    GROUP BY b.id_book
+  `, [id])
+
+  return selectedBook.rows[0];
 }

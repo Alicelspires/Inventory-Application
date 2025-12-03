@@ -12,11 +12,12 @@
     <%- include('components/sidebar.ejs');-%>
 
     <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center text-white">
-      <%- include('components/form.ejs', {book: "", genres, mode: "create"}); -%>
+      <%- include('components/form.ejs', {book: "", genres, errors, mode: "create"}); -%>
     </main>
 
     <%- include('components/footer.ejs'); -%>
     <script src="/js/sidebar.js"></script>
     <script src="/js/genreTags.js"></script>
+    <script src="/js/bookCover.js"></script>
 </body>
 </html>

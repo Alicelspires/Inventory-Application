@@ -1,6 +1,8 @@
 <form 
-    action="/books/new" method="POST"
-    class="w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light grid grid-cols-3 grid-rows-auto gap-4 mb-8">
+    action="<%= mode === 'create' ? '/books/new' : '/books/' + book.id_book + '/update' %>" 
+    method="POST"
+    class="w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light grid grid-cols-3 grid-rows-auto gap-4 mb-8"
+    enctype="multipart/form-data">
 
     <h1 class="col-span-3 text-center text-lg font-semibold">
         <%if (mode == "create") {%>
@@ -17,7 +19,7 @@
         value="<%= book.title || '' %>"
         type="text" 
         id="title" 
-        name="title">
+        name="title">     
 
         <label for="author">Author</label>
         <input 
@@ -30,10 +32,10 @@
         <label for="year">Publishing year</label>
         <input 
         class="bg-gray-lighter rounded-md p-1"
-        value="<%= book.year || '' %>"
+        value="<%= book.year_book || '' %>"
         type="text" 
         id="year" 
-        name="year">
+        name="year_book">
 
         <label for="publisher">Publisher name</label>
         <input 
@@ -60,8 +62,13 @@
         <div
             id="tagsContainer"
             class="flex flex-wrap gap-2 mt-2"
-            value="<%= book.genre || '' %>"
+            value="<%= book.genres || '' %>"
         ></div>
+
+        <script>
+            // Enviar os gêneros do livro para o script de tags
+            window.initialGenres = <%- JSON.stringify( book.genres || []) %>;
+        </script>
 
         <!-- Hidden - POST send -->
         <input type="hidden" name="categories" id="tagsInput">
@@ -75,8 +82,8 @@
         <textarea 
         class="bg-gray-lighter rounded-md p-2 h-full" 
         name="description" 
-        value="<%= book.description || '' %>"
-        id="description">
+        id="description"
+        > <%= book.description || '' %>
         </textarea>
     </div>
 
@@ -91,10 +98,19 @@
             name="cover" 
             class="mt-2 block hidden">
         <img 
-            class="bg-gray-lighter rounded-md w-46 h-60" 
-            src="<%= book.bookcase || '' %>" 
+            class="bg-gray-lighter rounded-md w-46 h-70 shadow-xl/50" 
+            id="img-file"
+            src=<%= book.book_cover || "/uploads/bookcover-default.jpg" %>
             alt="bookcase chosen">
     </div>
+
+    <% if (errors.length) { %>
+        <ul class="mb-2 text-xs text-red-300 list-disc list-inside">
+            <% errors.forEach(err => { %>
+            <li><%= err.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %> 
 
     <div class="col-span-3 flex justify-end gap-4">
         <a href="/books">
@@ -104,6 +120,7 @@
             >Voltar</button>
         </a>
         <button
+            type="submit"
             class="bg-btn-attention rounded-md p-2 px-4 cursor-pointer hover:bg-gray-dark">
             <%if (mode == "create") {%>
                 Create

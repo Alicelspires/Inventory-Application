@@ -11,14 +11,14 @@
     <%- include('components/navbar.ejs'); -%>
     <%- include('components/sidebar.ejs');-%>
 
-    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center text-white gap-4">
+    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center text-white gap-4 px-4 ">
         <div class="w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light">
 
             <form action="/books" method="GET">
                 <h3 class="text-borders-and-btn font-titles text-lg pb-1">Filter</h3>
-                <span class="flex gap-4 text-sm">
+                <span class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 text-sm">
                     <% genres.forEach( genre => {%>
-                        <span class="flex items-center gap-2">
+                        <span class="items-center gap-2">
                             <input 
                                 type="checkbox" 
                                 name="genre" 
@@ -32,22 +32,30 @@
                     <% }) %>
                 </span>
 
-                <h3 class="text-borders-and-btn font-titles text-lg py-1">Order By</h3>
+                <h3 class="text-borders-and-btn font-titles text-lg py-1 mt-4">Order By</h3>
                 <span class="flex gap-4 text-sm">
                     <span class="flex items-center gap-2">
-                        <input type="checkbox" name="sort" id="sort" value="asc">
+                        <input type="radio" name="sort" id="sort" value="asc"
+                            <%= (sortSelected && sortSelected.includes('asc')) ? "checked" : "" %>
+                        >
                         <label for="sort">Title A-Z</label>
                     </span>
                     <span class="flex items-center gap-2">
-                        <input type="checkbox" name="sort" id="sort" value="desc">
+                        <input type="radio" name="sort" id="sort" value="desc"
+                            <%= (sortSelected && sortSelected.includes('desc')) ? "checked" : "" %>
+                        >
                         <label for="sort">Title Z-A</label>
                     </span>
                     <span class="flex items-center gap-2">
-                        <input type="checkbox" name="sort" id="sort" value="old">
+                        <input type="radio" name="sort" id="sort" value="old"
+                            <%= (sortSelected && sortSelected.includes('old')) ? "checked" : "" %>
+                        >
                         <label for="sort">Oldest</label>
                     </span>
                     <span class="flex items-center gap-2">
-                        <input type="checkbox" name="sort" id="sort" value="new">
+                        <input type="radio" name="sort" id="sort" value="new"
+                            <%= (sortSelected && sortSelected.includes('new')) ? "checked" : "" %>
+                        >
                         <label for="sort">Newest</label>
                     </span>
                 </span>
@@ -58,7 +66,7 @@
             </form>
 
         </div>
-        <div class="w-5/6 flex flex-wrap gap-4 mb-6">
+        <div class="w-5/6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:auto-cols-max gap-4 mb-6">
             <% books.forEach((book) => {%>
             <%- include("components/cardsBooks.ejs", {book}); -%>
             <% })  %>
