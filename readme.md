@@ -119,16 +119,21 @@ Although developed as part of The Odin Project, the codebase follows a clean, pr
   │   ├─ css/
   |   |   ├─ style.css
   |   |   └─ custom.css
-  │   ├─ uploads/
+  │   ├─ uploads/ <- bookcovers
   |   └─ img/
   |
   └─ views/
-      ├─ uploads/ <- bookcases
+      ├─ components/
+      |    ├─ cardsBooks.ejs
+      |    ├─ footer.ejs
+      |    ├─ navbar.ejs
+      |    ├─ form.ejs
+      |    └─ sidebar.ejs
       |
       ├─ updateBook.ejs
       ├─ index.ejs
       ├─ createBook.ejs
-      ├─ errorsBook.ejs
+      ├─ books.ejs
       └─ deleteBook.ejs
 
   ```

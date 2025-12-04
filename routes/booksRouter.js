@@ -15,7 +15,7 @@ booksRouter
 // UPDATE BOOK PAGE
 booksRouter
     .get("/:id/update", booksController.bookUpdateGet)
-    .post("/:id/update", booksController.bookUpdatePost);
+    .post("/:id/update", upload.single("cover"), createBookValidation, booksController.bookUpdatePost);
 
 // DELETE BOOK PAGE
 booksRouter

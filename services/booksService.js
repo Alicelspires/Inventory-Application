@@ -27,3 +27,22 @@ exports.findBookById = async (id) => {
   const book = await booksRepository.selectBookById(id)
   return book;
 }
+
+exports.updateBook = async (id, data) => {
+  // update basic data
+  await booksRepository.updateBook(id, data);
+  
+  // remove old genres linked to the data[id]
+  await booksRepository.cleanGenreFromBook(id);
+
+  // add new genres
+  if(data.genres && data.genres.length > 0){
+    await booksRepository.addGenresToBook(id, data.genres)
+  }
+}
+
+exports.deleteBookById = async (id) => {
+  await booksRepository.deleteBookFromDB(id);
+  await booksRepository.cleanGenreFromBook(id);
+
+}

@@ -3,6 +3,23 @@ const pool = require("../db/pool.js");
 
 // SELECT setval('books_id_book_seq', (SELECT COALESCE(MAX(id_book),0) FROM books));
 
+// By id ===========================================
+exports.selectBookById = async (id) => {
+  const selectedBook = await pool.query(`
+    SELECT 
+        b.*,
+        COALESCE(array_agg(DISTINCT g.name_genre), '{}') AS genres
+      FROM books b
+      LEFT JOIN books_genres bg ON bg.id_book = b.id_book
+      LEFT JOIN genres g ON g.id_genre = bg.id_genre
+      WHERE b.id_book = $1
+    GROUP BY b.id_book
+  `, [id])
+
+  return selectedBook.rows[0];
+}
+
+// Filters =========================================
 function getFilteredBooks(sort) {
   let querySort = "";
 
@@ -29,6 +46,7 @@ function getFilteredGenres(genre) {
   return queryGenre;
 }
 
+// All data (books and genres) =====================
 exports.getAllBooks = async ({ genre, sort }) => {
   try {
     let filteredGenres = getFilteredGenres(genre);
@@ -47,6 +65,10 @@ exports.getAllBooks = async ({ genre, sort }) => {
       ${definedSorting}
       `
     );
+    // Select the books attributes 
+    // Distinct return unique values 
+    // Array_agg takes a set of values and returns an array 
+    // Coalesce returns the first no-null value on the array
 
     return { books: allBooks.rows };
   } catch (e) {
@@ -60,6 +82,7 @@ exports.getAllGenres = async () => {
 
 };
 
+// Insert data (book and genres) ===================
 exports.insertNewBook = async (newBook) => {
   const {title, description, publisher, year_book, author, book_cover} = newBook;
 
@@ -85,17 +108,29 @@ exports.addGenresToBook = async (bookId, genres) => {
   }
 };
 
-exports.selectBookById = async (id) => {
-  const selectedBook = await pool.query(`
-    SELECT 
-        b.*,
-        COALESCE(array_agg(DISTINCT g.name_genre), '{}') AS genres
-      FROM books b
-      LEFT JOIN books_genres bg ON bg.id_book = b.id_book
-      LEFT JOIN genres g ON g.id_genre = bg.id_genre
-      WHERE b.id_book = $1
-    GROUP BY b.id_book
-  `, [id])
+// Update data ====================================
+exports.updateBook = async (id, data) => {
+  const {title, description, publisher, year_book, author, book_cover} = data;
 
-  return selectedBook.rows[0];
+  await pool.query(`
+    UPDATE books SET
+      title = $1,
+      description = $2,
+      publisher = $3,
+      year_book = $4,
+      author = $5,
+      book_cover = COALESCE($6, book_cover)
+    WHERE id_book = $7
+   `,
+   [title, description, publisher, year_book, author, book_cover, id]
+  )
+}
+
+// Delete data (book and genre) ===================
+exports.deleteBookFromDB = async (id) => {
+  await pool.query(`DELETE FROM books WHERE id_book = $1`, [id])
+}
+
+exports.cleanGenreFromBook = async (id) => {
+  await pool.query(`DELETE FROM books_genres WHERE id_book = $1`, [id])
 }

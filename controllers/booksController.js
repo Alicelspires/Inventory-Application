@@ -1,7 +1,8 @@
-const { error } = require("console");
 const booksService = require("../services/booksService.js");
 const { normalizeGenre } = require("../utils/normalizeGenre.js");
 const { validationResult, matchedData } = require("express-validator");
+const fs = require("fs");
+const path = require("path")
 
 // Showing all existing books that match the selected filter and sorting criteria
 exports.bookListGet = async (req, res) => {
@@ -22,18 +23,20 @@ exports.bookListGet = async (req, res) => {
   }
 };
 
-// Render the create book page
+
+
+// Render the create book page ============================
 exports.bookCreatePostPage = async (req, res) => {
   const genres = await booksService.getListGenres();
   res.render("createBook", {genres, errors: "" });
 };
 
-// Creating new book
+// Creating new book 
 exports.bookCreatePost = async (req, res) => {
   const error = validationResult(req);
   const bookData = matchedData(req);
 
-  let genres = req.body.categories;
+  let genres = req.body.categories || [];
   
   // bookcover filename 
   if (!genres) {
@@ -66,24 +69,66 @@ exports.bookCreatePost = async (req, res) => {
   }
 };
 
-// Updating existing book informations
+
+
+// Updating existing book informations ======================
 exports.bookUpdateGet = async (req, res) => {
   const idBook = req.params.id
 
   try {
     const bookByID = await booksService.findBookById(idBook)
     const genres = await booksService.getListGenres()
-
-    res.render("updateBook", {book: bookByID, genres});
+  
+    res.render("updateBook", {book: bookByID, genres, errors: ""});
   } catch(e) {
     console.log("Error" + e)
   }
 };
 
 exports.bookUpdatePost = async (req, res) => {
-  res.render("updateBook");
+  const error = validationResult(req);
+  const bookData = matchedData(req);
+  const id = req.params.id;
+  const oldBook = await booksService.findBookById(id);
+
+  // genres will already come as an array from your validator
+  const genres = req.body.categories || [];
+
+  // new bookcover (if sent)
+  if (req.file) {
+    bookData.book_cover = "/uploads/" + req.file.filename;
+
+    if (oldBook.book_cover && oldBook.book_cover !== "/uploads/bookcover-default.jpg") {
+      const fileName = path.basename(oldBook.book_cover)
+      const oldPath = path.join(process.cwd(), "public", "uploads", fileName);
+
+      fs.rm(oldPath, err => {
+        if (err) console.log("Error deleting old image:", err);
+      });
+    }
+  } 
+
+  if (!error.isEmpty()) {
+    const book = await booksService.findBookById(id);
+
+    return res.render("createBook", {
+      book: { ...book, ...bookData, genres },
+      errors: error.array(),
+      genres: await booksService.getListGenres()
+    });
+  }
+
+  try {
+    await booksService.updateBook(id, { ...bookData, genres });
+    res.redirect(`/books`);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
+
+
+// Get ID book to Delete page ===============================
 exports.bookDeleteGet = async (req, res) => {
   const idBook = req.params.id;
 
@@ -96,6 +141,28 @@ exports.bookDeleteGet = async (req, res) => {
   }
 };
 
+// Delete book selected
 exports.bookDeletePost = async (req, res) => {
-  res.render("deleteBook");
+  const id = req.params.id;
+  const oldBook = await booksService.findBookById(id);
+
+  if (
+      oldBook.book_cover && 
+      oldBook.book_cover !== "/uploads/bookcover-default.jpg"
+    ) {
+    const fileName = path.basename(oldBook.book_cover)
+    const oldPath = path.join(process.cwd(), "public", "uploads", fileName);
+
+    fs.rm(oldPath, err => {
+      if (err) console.log("Error deleting old image:", err);
+    });
+  } 
+
+  try {
+    await booksService.deleteBookById(id);
+    res.redirect("/books");
+
+  } catch(e) {
+    console.log("Error" + e)
+  }
 };

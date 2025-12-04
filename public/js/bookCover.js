@@ -8,7 +8,8 @@ imgCover.addEventListener("change", () => {
     if(file) {
         imgURL = URL.createObjectURL(file);
     } else {
-        imgURL = "/uploads/bookcover-default.jpg"
+
+        
     } 
 
     showImg.src = imgURL;
