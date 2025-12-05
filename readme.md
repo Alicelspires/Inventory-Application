@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./public/img/origami.png" alt="origami logo">
+  <img width="75" src="./public/img/origami.png" alt="origami logo">
 
   # Inventory Application
   
@@ -222,3 +222,9 @@ http://localhost:6969
 ## License
 
 **MIT License** — free to modify & share.
+
+<div align="center">
+  
+![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=Alicelspires.Inventory-Application&left_color=grey&right_color=black&left_text=Visitors)
+
+</div> 
