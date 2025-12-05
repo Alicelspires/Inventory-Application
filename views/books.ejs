@@ -6,17 +6,16 @@
     <link href="/css/style.css" rel="stylesheet">
     <title>Books</title>
 </head>
-<body class="min-h-screen grid grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
+<body class="min-h-screen grid grid-cols-1 md:grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
 
     <%- include('components/navbar.ejs'); -%>
     <%- include('components/sidebar.ejs');-%>
 
-    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center text-white gap-4 px-4 ">
-        <div class="w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light">
-
+    <main class="row-start-2 md:col-start-2 col-start-1 bg-gray-dark flex flex-col justify-center items-center text-white gap-4 px-4 ">
+        <div class="w-full md:w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light mx-4">
             <form action="/books" method="GET">
                 <h3 class="text-borders-and-btn font-titles text-lg pb-1">Filter</h3>
-                <span class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 text-sm">
+                <span class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 text-sm">
                     <% genres.forEach( genre => {%>
                         <span class="items-center gap-2">
                             <input 
@@ -33,7 +32,7 @@
                 </span>
 
                 <h3 class="text-borders-and-btn font-titles text-lg py-1 mt-4">Order By</h3>
-                <span class="flex gap-4 text-sm">
+                <span class="flex flex-wrap gap-4 text-sm mb-4">
                     <span class="flex items-center gap-2">
                         <input type="radio" name="sort" id="sort" value="asc"
                             <%= (sortSelected && sortSelected.includes('asc')) ? "checked" : "" %>
@@ -66,7 +65,7 @@
             </form>
 
         </div>
-        <div class="w-5/6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:auto-cols-max gap-4 mb-6">
+        <div class="w-full md:w-5/6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:auto-cols-max gap-4 mb-6 mx-4">
             <% books.forEach((book) => {%>
             <%- include("components/cardsBooks.ejs", {book}); -%>
             <% })  %>

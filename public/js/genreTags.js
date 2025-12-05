@@ -11,7 +11,7 @@ function renderTags() {
     tags.forEach((tag, index) => {
     const tagEl = document.createElement("span");
     tagEl.className =
-        "flex items-center gap-2 bg-neutral-300 text-zinc-950 px-3 py-1 rounded-full text-sm font-semibold";
+        "flex items-center gap-2 bg-gray-white hover:bg-gray-whiteish text-black px-3 py-1 rounded-full text-sm font-semibold";
 
     tagEl.innerHTML += `<span>${tag}</span>`;
     tagEl.innerHTML += `

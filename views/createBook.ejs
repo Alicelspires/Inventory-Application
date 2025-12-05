@@ -6,12 +6,12 @@
   <link href="/css/style.css" rel="stylesheet">
   <title>New Book</title>
 </head>
-<body class="min-h-screen grid grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
+<body class="min-h-screen grid grid-cols-1 md:grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
 
     <%- include('components/navbar.ejs'); -%>
     <%- include('components/sidebar.ejs');-%>
 
-    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center text-white">
+    <main class="row-start-2 md:col-start-2 col-start-1 bg-gray-dark flex flex-col justify-center items-center text-white">
       <%- include('components/form.ejs', {book: "", genres, errors, mode: "create"}); -%>
     </main>
 

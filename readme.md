@@ -1,4 +1,4 @@
-# Book Inventory
+# Inventory Application
 
 A complete full-stack bookstore inventory system built with Express and PostgreSQL (Neon), offering CRUD operations, image uploads, sorting, filtering, and elegant server-rendered interfaces using EJS + Tailwind CSS.
 
@@ -22,17 +22,21 @@ Although developed as part of The Odin Project, the codebase follows a clean, pr
 ![Neon](https://img.shields.io/badge/NeonDB-00E599?logo=postgresql&logoColor=white)
 ![Express-Validator](https://img.shields.io/badge/express%20validator-3a0f57?logo=norton&logoColor=%23a752e0)
 
-## Pages
+## Main Page
 
-### Home Page
+<img width="500px" align="center" src="./public/img/mainPage.png" alt="High Fidelity Prototype">
 
-### Books Page
+### Design
 
-### Add new book Page
+<details>
+<summary>High Fidelity Prototype</summary>
+<img width="500px" align="center" src="./public/img/highFidelityPrototype.png" alt="Design System">
+</details>
 
-### Delete book Page
-
-### Error Page
+<details>
+<summary>Design System</summary>
+<img width="500px" align="center" src="./public/img/designSystem.png" alt="Design System">
+</details>
 
 ## Features
 
@@ -86,9 +90,7 @@ Although developed as part of The Odin Project, the codebase follows a clean, pr
   ├─ package.json
   |
   ├─ db/
-  │   ├─ pool.js
-  │   └─ data/
-  │       └─ booksData.js
+  │   └─ pool.js
   │
   ├─ controllers/
   │   ├─ indexController.js
@@ -176,13 +178,13 @@ PORT=8080
 Development mode (server + Tailwind watcher)
 
 ```bash
-npm dev
+npm run dev
 ```
 
 Build Tailwind for production
 
 ```bash
-pnpm css:build
+npm run css:build
 ```
 
 Start server normally
@@ -200,10 +202,7 @@ http://localhost:6969
 ## Image Upload System
 
 - Uploads stored in: `public/uploads/`
-- Uses Multer disk storage
-- Accepts: `.jpg`, `.jpeg`, `.png`, `.webp`
 - Max file size: **5MB**
-
 
 ## License
 

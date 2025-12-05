@@ -1,4 +1,4 @@
-<aside class="row-start-2 bg-gray-light w-48 h-full absolute md:relative text-white text-center p-8">
+<aside class="bg-gray-light border-r-2 border-borders-and-btn md-border-0 h-full absolute md:relative text-white text-center p-8 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40" id="sidebar">
     <ul class="flex flex-col gap-4">
         <a id="nav-side" href="/">
             <li class="hover:bg-gray-lighter rounded-lg p-2">
@@ -14,3 +14,9 @@
         </a>
     </ul>
 </aside>
+
+<button id="toggleSidebar"
+    class="md:hidden fixed bottom-6 right-6 bg-borders-and-btn rounded-full w-[40px] h-[40px] cursor-pointer hover:bg-btn-hover z-50">
+    <img id="toggleIcon" class="m-auto w-6 transition-transform duration-300"
+         src="/img/menu.png" alt="toggle sidebar">
+</button>

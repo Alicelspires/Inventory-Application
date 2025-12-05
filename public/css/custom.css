@@ -6,10 +6,12 @@
     --font-text:"Oswald", sans-serif;
 
     --color-icons: #ecb476;
-    --color-btn-hover: #E0CA65;
+    --color-btn-hover: #E9CF59;
     --color-borders-and-btn: #C9B55A;
     --color-btn-attention: #101010;
 
+    --color-gray-white:#E3E3E3;
+    --color-gray-whiteish:#AFAFAF;
     --color-gray-lighter: #57564E;
     --color-gray-light: #36352F;
     --color-gray-dark: #201F1C;

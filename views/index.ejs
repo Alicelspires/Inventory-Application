@@ -6,12 +6,12 @@
     <link href="/css/style.css" rel="stylesheet">
     <title>Home</title>
   </head>
-  <body class="min-h-screen grid grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto]">
+  <body class="min-h-screen grid grid-cols-1 md:grid-cols-[180px_1fr] grid-rows-[auto_1fr_auto] bg-gray-dark">
 
     <%- include('components/navbar.ejs'); -%>
     <%- include('components/sidebar.ejs');-%>
 
-    <main class="row-start-2 col-start-2 bg-gray-dark flex flex-col justify-center items-center">
+    <main class="row-start-2 md:col-start-2 col-start-1 bg-[url(/img/bg-books.jpg)] bg-cover flex flex-col justify-center items-center">
       
       <img class="w-20" src="/img/origami.png" alt="">
       <h1 class="font-titles font-bold text-4xl text-white">Inventory Application</h1>

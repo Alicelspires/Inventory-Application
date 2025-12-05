@@ -1,10 +1,10 @@
 <form 
     action="<%= mode === 'create' ? '/books/new' : '/books/' + book.id_book + '/update' %>" 
     method="POST"
-    class="w-5/6 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light grid grid-cols-3 grid-rows-auto gap-4 mb-8"
+    class="m-4 w-9/10 lg:w-5/6 grid grid-cols-1 lg:grid-cols-3 p-4 border-2 border-borders-and-btn rounded-lg bg-gray-light gap-4"
     enctype="multipart/form-data">
 
-    <h1 class="col-span-3 text-center text-lg font-semibold">
+    <h1 class="col-span-1 md:col-span-3 text-center text-lg font-semibold">
         <%if (mode == "create") {%>
             New Book
         <% } else if (mode == "update") {%>
@@ -12,7 +12,7 @@
         <% }%>
     </h1>
 
-    <div class="row-start-2 flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
         <label for="title">Title</label>
         <input 
         class="bg-gray-lighter rounded-md p-1"
@@ -66,7 +66,7 @@
         ></div>
 
         <script>
-            // Enviar os gêneros do livro para o script de tags
+            // Send the book genres to the tag script
             window.initialGenres = <%- JSON.stringify( book.genres || []) %>;
         </script>
 
@@ -77,24 +77,24 @@
         <div id="tagLive" aria-live="polite" class="sr-only"></div>
     </div>
 
-    <div class="row-start-2 flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
         <label for="description">Description</label>
         <textarea 
-        class="bg-gray-lighter rounded-md p-2 h-full" 
+        class="bg-gray-lighter rounded-md p-2 md:h-full h-80" 
         name="description" 
         id="description"
         > <%= book.description || '' %>
         </textarea>
     </div>
 
-    <div class="row-start-2 flex flex-col items-end">
+    <div class="flex flex-col items-center mb-8 md:items-end md:mb-0">
         <label 
             for="cover"
             class="border-1 border-white bg-transparent rounded-md p-2 mb-4 cursor-pointer text-sm"
             >Choose bookcase</label>
         <input 
             id="cover"
-            type="file" 
+            type="file"
             name="cover" 
             class="mt-2 block hidden">
         <img 
@@ -112,7 +112,7 @@
         </ul>
     <% } %> 
 
-    <div class="col-span-3 flex justify-end gap-4">
+    <div class="col-span-1 md:col-span-3 flex justify-end gap-4">
         <a href="/books">
             <button 
                 type="button"

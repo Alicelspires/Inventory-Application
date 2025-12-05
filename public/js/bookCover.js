@@ -7,11 +7,8 @@ imgCover.addEventListener("change", () => {
 
     if(file) {
         imgURL = URL.createObjectURL(file);
-    } else {
-
-        
     } 
-
+    
     showImg.src = imgURL;
 })
 
