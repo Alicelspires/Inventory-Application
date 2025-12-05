@@ -1,6 +1,9 @@
-<img align="center" src="./public/img/origami.png" alt="origami logo">
+<div align="center">
+  <img src="./public/img/origami.png" alt="origami logo">
 
-# Inventory Application
+  # Inventory Application
+  
+</div>
 
 A complete full-stack bookstore inventory system built with Express and PostgreSQL (Neon), offering CRUD operations, image uploads, sorting, filtering, and elegant server-rendered interfaces using EJS + Tailwind CSS.
 
@@ -10,7 +13,7 @@ Although developed as part of The Odin Project, the codebase follows a clean, pr
 
 ## Live Demo
 
-`Vercel`: []()
+`Vercel`: [https://inventory-application-liard.vercel.app/](https://inventory-application-liard.vercel.app/)
 
 ## Tech Stack & Tools
 
@@ -26,18 +29,24 @@ Although developed as part of The Odin Project, the codebase follows a clean, pr
 
 ## Main Page
 
-<img width="500px" align="center" src="./public/img/mainPage.png" alt="High Fidelity Prototype">
+<div align="center">
+  <img align="center" src="./public/img/mainPage.png" alt="High Fidelity Prototype">
+</div>
 
 ### Design
 
 <details>
 <summary>High Fidelity Prototype</summary>
-<img width="500px" align="center" src="./public/img/highFidelityPrototype.png" alt="Design System">
+  <div align="center">
+    <img width="500px" align="center" src="./public/img/highFidelityPrototype.png" alt="Design System">
+  </div>
 </details>
 
 <details>
 <summary>Design System</summary>
-<img width="500px" align="center" src="./public/img/designSystem.png" alt="Design System">
+  <div align="center">
+    <img width="500px" align="center" src="./public/img/designSystem.png" alt="Design System">
+  </div>
 </details>
 
 ## Features
@@ -146,12 +155,16 @@ Although developed as part of The Odin Project, the codebase follows a clean, pr
 
 ## Architecture validation
 
-<img alt="image" width="550" src="./public/img/web_server_form_handling.png"/>
+<div align="center">
+  <img alt="image" width="550" src="./public/img/web_server_form_handling.png"/>
+</div>
 
 ## Database Schema
 
-<img alt="image" width="550" src="./public/img/bd_books.png"/>
-<p><i>https://dbdiagram.io/d</i></p>
+<div align="center">
+  <img alt="image" width="550" src="./public/img/bd_books.png"/>
+  <p><i>https://dbdiagram.io/d</i></p>
+</div>
 
 ## Setup & Installation
 
