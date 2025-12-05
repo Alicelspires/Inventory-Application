@@ -1,3 +1,5 @@
+<img align="center" src="./public/img/origami.png" alt="origami logo">
+
 # Inventory Application
 
 A complete full-stack bookstore inventory system built with Express and PostgreSQL (Neon), offering CRUD operations, image uploads, sorting, filtering, and elegant server-rendered interfaces using EJS + Tailwind CSS.
