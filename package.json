@@ -15,10 +15,10 @@
   },
   "name": "express-theodinproject",
   "version": "1.0.0",
-  "description": "",
+  "description": "Inventory application to keep your books organized",
   "main": "app.js",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Alice Silva",
+  "license": "MIT",
   "type": "commonjs"
 }
