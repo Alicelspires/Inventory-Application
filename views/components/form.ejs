@@ -58,7 +58,6 @@
             <% }) %>
         </select>
 
-        <!-- Visual tags-->
         <div
             id="tagsContainer"
             class="flex flex-wrap gap-2 mt-2"
@@ -70,10 +69,8 @@
             window.initialGenres = <%- JSON.stringify( book.genres || []) %>;
         </script>
 
-        <!-- Hidden - POST send -->
         <input type="hidden" name="categories" id="tagsInput">
 
-        <!-- Live region for accessibility -->
         <div id="tagLive" aria-live="polite" class="sr-only"></div>
     </div>
 
